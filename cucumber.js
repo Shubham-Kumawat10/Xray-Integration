@@ -1,3 +1,3 @@
 module.exports = {
-  default: `--format json:cucumber-report.json --require step-definitions/**/*.js features/*.feature`
+  default: `--format json:cucumber_report.json --require features/**/*.feature --require step-definitions/**/*.js`
 }
