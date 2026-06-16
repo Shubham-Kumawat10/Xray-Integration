@@ -10,17 +10,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Installs your npm packages and the Playwright browsers
-                sh 'npm install'
-                sh 'npx playwright install --with-deps'
+                // Changed from sh to bat because your Jenkins runs on Windows
+                bat 'npm install'
+                bat 'npx playwright install --with-deps'
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Runs cucumber and catches errors so the pipeline doesn't stop before reporting
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'npx cucumber-js'
+                    // Changed from sh to bat because your Jenkins runs on Windows
+                    bat 'npx cucumber-js'
                 }
             }
         }
@@ -28,15 +28,9 @@ pipeline {
 
     post {
         always {
-            // FIXED: Using the exact parameter pattern the plugin expects
+            // This builds your visual charts report webpage inside Jenkins
             cucumber fileIncludePattern: 'cucumber_report.json',
                      jsonReportDirectory: '.'
-            
-            // This pushes your test results automatically back to Jira/Xray
-            // Note: Replace 'Your-Jira-Config-Name' with your actual Jenkins Jira instance name
-            xrayImportResults fileFormat: 'CUCUMBER', 
-                              resultsFile: 'cucumber_report.json', 
-                              serverInstance: 'Your-Jira-Config-Name'
         }
     }
 }
