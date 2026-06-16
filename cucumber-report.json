@@ -1,0 +1,63 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "xray-test-sync;verify-google-search-opens",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Verify Google Search Opens",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 29125088499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I open the browser and go to google",
+            "match": {
+              "location": "step-definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12512226600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166667900
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@PRESENT-2",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "xray-test-sync",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Xray Test Sync",
+    "tags": [
+      {
+        "name": "@PRESENT-2",
+        "line": 1
+      }
+    ],
+    "uri": "features\\login.feature"
+  }
+]
