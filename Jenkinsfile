@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // This pulls your latest code from your GitHub repository automatically
                 checkout scm
             }
         }
@@ -29,12 +28,11 @@ pipeline {
 
     post {
         always {
-            // 1. This generates your beautiful, visual Cucumber HTML report page
-            cucumber buildStatus: 'null', 
-                     reportFiles: 'cucumber_report.json', 
-                     fileIncludePattern: '**/*.json'
+            // FIXED: Using the exact parameter pattern the plugin expects
+            cucumber fileIncludePattern: 'cucumber_report.json',
+                     jsonReportDirectory: '.'
             
-            // 2. This pushes your test results automatically back to Jira/Xray
+            // This pushes your test results automatically back to Jira/Xray
             // Note: Replace 'Your-Jira-Config-Name' with your actual Jenkins Jira instance name
             xrayImportResults fileFormat: 'CUCUMBER', 
                               resultsFile: 'cucumber_report.json', 
